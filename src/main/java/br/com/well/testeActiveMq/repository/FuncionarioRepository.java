@@ -11,5 +11,4 @@ import java.util.List;
 public interface FuncionarioRepository extends JpaRepository<Pessoa ,  Integer> {
 
 
-  //  List<Pessoa> buscarDto();
 }

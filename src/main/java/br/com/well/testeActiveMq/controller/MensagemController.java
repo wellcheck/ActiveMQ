@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/v1")
@@ -29,8 +28,8 @@ public class MensagemController {
     }
 
     @GetMapping(value = "/tudo")
-    public ResponseEntity buscarTudo(){
-        List<Pessoa> pessoaList = service.buscar();
+    public ResponseEntity buscarTudo(Integer id){
+        List<Pessoa> pessoaList = service.buscar(id);
         return ResponseEntity.ok(pessoaList);
 
     }
@@ -47,11 +46,17 @@ public class MensagemController {
         return ResponseEntity.ok(result);
     }
 
+    @GetMapping(value = "/{id}")
+    public ResponseEntity buscarId(@PathVariable Integer id){
+        service.bucarId(id);
+        return (ResponseEntity) ResponseEntity.ok();
+    }
+
     @GetMapping(value = "/{name}/{idade}/{pais}")
-    public ResponseEntity listarDTO2(@RequestParam(name = "name") String name,
-                                     @RequestParam(name = "idade")Integer idade,
-                                     @RequestParam(name = "pais")String pais){
-        List<PessoaDTO> result = service.buscarDto2(name + idade + pais);
+    public ResponseEntity listarDTO2(@PathVariable String name,
+                                     @PathVariable Integer idade,
+                                     @PathVariable String pais){
+        List<PessoaDTO> result = service.buscarDto2(name, idade, pais);
         System.out.println(result);
         return ResponseEntity.ok(result);
     }
