@@ -68,7 +68,7 @@ public class MensagemController {
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
-    @DeleteMapping(value = "{id}")
+    @DeleteMapping(value = "/{id}")
     @Transactional
     public ResponseEntity deletar(@PathVariable Integer id){
         service.deletar(id);
