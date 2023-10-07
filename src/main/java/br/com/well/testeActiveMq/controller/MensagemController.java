@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/v1")
@@ -47,9 +48,9 @@ public class MensagemController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity buscarId(@PathVariable Integer id){
-        service.bucarId(id);
-        return (ResponseEntity) ResponseEntity.ok();
+    public ResponseEntity<Pessoa> buscarId(@PathVariable Integer id){
+      Optional result = service.bucarId(id);
+        return new ResponseEntity(result, HttpStatus.FOUND);
     }
 
     @GetMapping(value = "/{name}/{idade}/{pais}")

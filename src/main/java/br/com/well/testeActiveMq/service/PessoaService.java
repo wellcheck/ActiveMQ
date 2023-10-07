@@ -25,17 +25,19 @@ public class PessoaService {
         return pessoa;
     }
 
-    public void bucarId(Integer id) {
+    public Optional bucarId(Integer id) {
 
-       if(id != null) {
-           Optional pessoa;
-           pessoa = pessoaRepository.findById(id);
-           log.info("Pessoa encontrada com sucesso {}", pessoa);
-           return;
-       } if (id == null && id.equals(0)){
-           log.error("Não foi possivel buscar a pessoa.");
-       }
+        Optional pessoa = null;
+        if (id != null) {
+            pessoa = pessoaRepository.findById(id);
+            log.info("Pessoa encontrada com sucesso {}", pessoa);
+            return pessoa;
+        }
+        if (id == null && id.equals(0)) {
+            log.error("Não foi possivel buscar a pessoa.");
+        }
 
+        return pessoa;
     }
 
     public Pessoa adicionar(Pessoa pessoa){

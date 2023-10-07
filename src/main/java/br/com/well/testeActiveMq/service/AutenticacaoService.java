@@ -1,5 +1,6 @@
 package br.com.well.testeActiveMq.service;
 
+import br.com.well.testeActiveMq.repository.UserRepository;
 import br.com.well.testeActiveMq.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,9 +14,11 @@ public class AutenticacaoService implements UserDetailsService {
     @Autowired
     private UsuarioRepository repository;
 
+    private UserRepository userRepository;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        return repository.findByLogin(username);
+        return userRepository.findByLogin(username);
     }
 }
