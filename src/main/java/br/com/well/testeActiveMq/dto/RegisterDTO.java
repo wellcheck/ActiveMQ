@@ -1,4 +1,4 @@
-package br.com.well.testeActiveMq.controller;
+package br.com.well.testeActiveMq.dto;
 
 import br.com.well.testeActiveMq.util.Status;
 

@@ -1,5 +1,6 @@
 package br.com.well.testeActiveMq.model;
 
+import br.com.well.testeActiveMq.util.Status;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,11 +30,12 @@ public class Usuario implements UserDetails {
     @NotNull
     private String senha;
 
-    private UsuarioRole role;
+    @Enumerated(EnumType.STRING)
+    private Status role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(this.role == UsuarioRole.ADMIN)
+        if(this.role == Status.ADMIN)
             return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
         else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
 
