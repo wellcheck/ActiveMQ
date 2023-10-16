@@ -12,7 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("auth")
+@RequestMapping(value = "auth")
 public class AutenticacaoController {
 
     @Autowired
@@ -20,9 +20,6 @@ public class AutenticacaoController {
 
     @Autowired
     private UserRepository repository;
-
-
-
 
     @RequestMapping("/login")
     public ResponseEntity login(@RequestBody AutenticationDTO data){

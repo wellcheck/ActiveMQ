@@ -2,6 +2,7 @@ package br.com.well.testeActiveMq.configuration;
 
 
 import br.com.well.testeActiveMq.util.Status;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -20,6 +21,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfiguration{
 
+
     private Status status;
 
     @Bean
@@ -30,12 +32,16 @@ public class SecurityConfiguration{
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/auth/login").permitAll()
                         .requestMatchers("/auth/registrar").permitAll()
+
                         .requestMatchers("/v1/**").hasRole("ADMIN")
-    /*                    .requestMatchers(HttpMethod.GET, "/v1/tudo").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.POST, "/v1/tudo").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/v1/tudo").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/v1/tudo").hasRole("ADMIN")*/
+                        .requestMatchers( "/swagger-ui/**").hasRole("ADMIN")
+                        .requestMatchers( "/swagger-resources/**").hasRole("ADMIN")
+                        .requestMatchers( "/swagger-ui/index.html").hasRole("ADMIN")
+                        .requestMatchers( "/v3/api-docs").hasRole("ADMIN")
+                        .requestMatchers( "/v3/**").hasRole("ADMIN")
+                        .requestMatchers( "/javainuse-openapi/**").hasRole("ADMIN")
                         .anyRequest().authenticated())
+
                 .httpBasic(Customizer.withDefaults())
 
                 .build();
